@@ -1,0 +1,10 @@
+<MyWidget>:
+   BoxLayout:
+
+       Button:
+           text: "open"
+           on_release: my_widget.open(filechooser.path, filechooser.selection)
+
+       FileChooserListView:
+           id: filechooser
+           on_selection: my_widget.selected(filechooser.selection)

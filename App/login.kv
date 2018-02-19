@@ -1,0 +1,147 @@
+<Login>:
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+
+        Label:
+            text: 'Welcome'
+            font_size: 32
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Login'
+                font_size: 18
+                align: 'left'
+                text_size: root.width-20, 20
+
+            TextInput:
+                id: login
+                multiline:False
+                font_size: 28
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Password'
+                align: 'left'
+                font_size: 18
+                text_size: root.width-20, 20
+
+            TextInput:
+                id: password
+                multiline:False
+                password:True
+                font_size: 28
+
+        Button:
+            text: 'Login'
+            font_size: 24
+
+            on_press: root.do_login(login.text, password.text)
+
+<Connected>:
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Label:
+            text: 'Welcome'
+            font_size: 32
+
+        Button:
+            text: 'capture reference sheet'
+            on_press: root.manager.current ='reference'
+        Button:
+            text: 'capture answer sheet'
+            on_press: root.manager.current = 'answer'
+        Button:
+            text: 'view result'
+            on_press: root.manager.current = 'result'
+        Button:
+            text: 'Quit'
+            on_press: root.dismiss()
+
+<Reference>:
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Button:
+            text: 'Import from device'
+            on_press: root.manager.current = 'importfile'
+        Button:
+            text: 'Take a Picture'
+
+        Button:
+            text: 'Quit'
+            on_press: root.dismiss()
+<Answer>:
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Button:
+            text: 'Import from device'
+            on_press: root.ImportAns()
+        Button:
+            text: 'Take a Picture'
+
+
+        Button:
+            text: 'Quit'
+            on_press: root.dismiss()
+<Result>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Button:
+            text: 'Show Paper'
+            on_press: root.ShowPaper()
+<ImportFile>:
+    BoxLayout:
+
+        Button:
+            text: "open"
+            on_press: root.open(filechooser.selection)
+        FileChooserListView:
+            id: filechooser
+            on_selection: root.selected(filechooser.selection)
+        Image:
+            id: image
+            source: ""
+
+<CalcGridLayout>:
+    id: calculator
+    display: entry
+    rows: 2
+    padding: 10
+    spacing: 10
+
+    # Where input is displayed
+    BoxLayout:
+        Image:
+            id: Dimage
+            source: ""
+    # When buttons are pressed update the entry
+    BoxLayout:
+        spacing: 10
+        Button:
+            text: "Select Another"
+            on_press: root.manager.current = 'importfile'
+        Button:
+            text: "Done"
+            on_press: root.manager.current = 'connected'
