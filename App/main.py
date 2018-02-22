@@ -7,6 +7,9 @@ from connected import Reference
 from connected import Answer
 from connected import Result
 from connected import ImportFile
+from connected import ImportFile2
+from connected import SelectOpt
+from connected import SelectOpt1
 
 class Login(Screen):
     def do_login(self, loginText, passwordText):
@@ -33,13 +36,18 @@ class LoginApp(App):
 
     def build(self):
         manager = ScreenManager()
-
+        manager.id = 'parenthere'
+        manager.name = 'parenthere'
         manager.add_widget(Login(name='login'))
         manager.add_widget(Connected(name='connected'))
         manager.add_widget(Reference(name='reference'))
         manager.add_widget(ImportFile(name='importfile'))
+        manager.add_widget(SelectOpt(name='selectopt', id='selectopthere'))
+        manager.add_widget(ImportFile2(name='importfile2'))
+        manager.add_widget(SelectOpt(name='selectopt1', id='selectopthere1'))
         manager.add_widget(Answer(name='answer'))
         manager.add_widget(Result(name='result'))
+
 
 
 

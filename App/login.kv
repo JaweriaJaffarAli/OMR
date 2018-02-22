@@ -87,14 +87,26 @@
             on_press: root.dismiss()
 <Answer>:
     BoxLayout:
-        id: login_layout
         orientation: 'vertical'
         padding: [10,50,10,50]
         spacing: 50
+        BoxLayout:
+            orientation: 'horizontal'
 
+            Label:
+                text: 'Enter Roll Number'
+                font_size: 18
+                align: 'left'
+            TextInput:
+                id: rollNo
+                multiline:False
+                font_size: 28
+            Button:
+                text: 'Enter'
+                on_press: root.EnterRollNo(rollNo.text)
         Button:
             text: 'Import from device'
-            on_press: root.ImportAns()
+            on_press: root.manager.current = 'importfile2'
         Button:
             text: 'Take a Picture'
 
@@ -105,18 +117,44 @@
 <Result>:
     BoxLayout:
         orientation: 'vertical'
-        padding: [10,50,10,50]
-        spacing: 50
+        padding: [10,10,10,10]
+        spacing: 10
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Roll Number'
+                Label:
+                    id: rollno
+                    text: " "
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Marks'
+                Label:
+                    id: Score
+                    text: " "
+            BoxLayout:
+                Image:
+                    id: Pimage
+                    source: ""
 
-        Button:
-            text: 'Show Paper'
-            on_press: root.ShowPaper()
+        BoxLayout:
+            padding: [10,50,10,50]
+            spacing: 50
+            Button:
+                text: 'Show Paper'
+                on_press: root.ShowPaper()
+
+
 <ImportFile>:
     BoxLayout:
-
+        padding: [10,50,10,50]
+        spacing: 50
         Button:
             text: "open"
-            on_press: root.open(filechooser.selection)
+            on_press: root.open(filechooser.selection , filechooser.path)
         FileChooserListView:
             id: filechooser
             on_selection: root.selected(filechooser.selection)
@@ -124,24 +162,57 @@
             id: image
             source: ""
 
-<CalcGridLayout>:
-    id: calculator
-    display: entry
-    rows: 2
-    padding: 10
-    spacing: 10
+<SelectOpt>:
+    id: selectopthere
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+        BoxLayout:
+            Image:
+                id: image
+                source: " "
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "Select Another"
+                on_press: root.manager.current = 'importfile'
+            Button:
+                text: "Done"
+                on_press: root.manager.current = 'connected'
 
-    # Where input is displayed
+<SelectOpt1>:
+    id: selectopthere1
     BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+        BoxLayout:
+            Image:
+                id: image
+                source: " "
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "Select Another"
+                on_press: root.manager.current = 'importfile'
+            Button:
+                text: "Done"
+                on_press: root.manager.current = 'connected'
+
+
+<ImportFile2>:
+    BoxLayout:
+        padding: [10,50,10,50]
+        spacing: 50
+        Button:
+            text: "open"
+            on_press: root.ImportAns(filechooser2.selection , filechooser2.path)
+        FileChooserListView:
+            id: filechooser2
+            on_selection: root.selected(filechooser2.selection)
         Image:
-            id: Dimage
+            id: Aimage
             source: ""
-    # When buttons are pressed update the entry
-    BoxLayout:
-        spacing: 10
-        Button:
-            text: "Select Another"
-            on_press: root.manager.current = 'importfile'
-        Button:
-            text: "Done"
-            on_press: root.manager.current = 'connected'
