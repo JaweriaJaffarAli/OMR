@@ -1,23 +1,27 @@
 <Login>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [10,50,10,50]
-        spacing: 50
-
+        padding: [200,50,200,50]
+        spacing: 40
 
         Label:
-            text: 'Welcome'
-            font_size: 32
+            markup: True
+            text: '[anchor=title][size=30][b]WELCOME[/b][/size]'
+
 
         BoxLayout:
             orientation: 'vertical'
 
             Label:
-                text: 'Login'
-                font_size: 18
-                align: 'left'
-                text_size: root.width-20, 20
+                markup: True
+                text: '[size=20][b]Username[/b][/size]'
+                text_size: root.width-400, 20
 
             TextInput:
                 id: login
@@ -28,28 +32,35 @@
         BoxLayout:
             orientation: 'vertical'
             Label:
-                text: 'Password'
-                align: 'left'
-                font_size: 18
-                text_size: root.width-20, 20
+                markup: True
+                text: '[size=20][b]Password[/b][/size]'
+                text_size: root.width-400, 20
 
             TextInput:
                 id: password
                 multiline:False
                 password:True
                 font_size: 28
-
-        Button:
-            text: 'Login'
-            font_size: 24
-
-            on_press: root.do_login(login.text, password.text)
+        BoxLayout:
+            padding: [100, 0, 100, 10]
+            Button:
+                text: 'Login'
+                font_size: 24
+                size_hint: .4 , .6
+                background_color: .1 , 1, 1, 1
+                align: 'center'
+                on_press: root.do_login(login.text, password.text)
 
 <Connected>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [10,50,10,50]
+        padding: [50,20,50,20]
         spacing: 50
 
         Label:
@@ -57,35 +68,62 @@
             font_size: 32
 
         Button:
-            text: 'capture reference sheet'
+            text: 'Add Reference Sheet'
             on_press: root.manager.current ='reference'
+
         Button:
-            text: 'capture answer sheet'
-            on_press: root.manager.current = 'answer'
+
+            text: 'Add Answer Sheet'
+            on_press: root.CheckRefSheet()
+
         Button:
             text: 'view result'
             on_press: root.manager.current = 'result'
+
         Button:
-            text: 'Quit'
-            on_press: root.dismiss()
+            text: 'Logout'
+            on_press: root.disconnect()
+
+        BoxLayout:
+            padding: [300 , 0, 300, 0]
+            Button:
+                text: 'Quit'
+                on_press: root.dismiss()
 
 <Reference>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [10,50,10,50]
-        spacing: 50
+        padding: [10,80,10,50]
+        spacing: 70
 
         Button:
             text: 'Import from device'
+            size_hint: 1 , 1
             on_press: root.manager.current = 'importfile'
         Button:
             text: 'Take a Picture'
+            size_hint: 1 , 1
 
         Button:
-            text: 'Quit'
-            on_press: root.dismiss()
+            text: 'Back'
+            on_press: root.manager.current = 'connected'
+        BoxLayout:
+            padding: [300 , 0, 300, 0]
+            Button:
+                text: 'Quit'
+                on_press: root.dismiss()
 <Answer>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         orientation: 'vertical'
         padding: [10,50,10,50]
@@ -95,26 +133,40 @@
 
             Label:
                 text: 'Enter Roll Number'
+                color: 2, 2, .92, 1
                 font_size: 18
                 align: 'left'
             TextInput:
                 id: rollNo
                 multiline:False
-                font_size: 28
+                font_size: 18
             Button:
                 text: 'Enter'
                 on_press: root.EnterRollNo(rollNo.text)
         Button:
             text: 'Import from device'
-            on_press: root.manager.current = 'importfile2'
+
+            on_press: root.Check_RollNumber()
         Button:
             text: 'Take a Picture'
 
 
         Button:
-            text: 'Quit'
-            on_press: root.dismiss()
+            text: 'Back'
+            on_press: root.manager.current = 'connected'
+        BoxLayout:
+            padding: [300 , 0, 300, 0]
+            Button:
+                text: 'Quit'
+
+                on_press: root.dismiss()
+
 <Result>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         orientation: 'vertical'
         padding: [10,10,10,10]
@@ -141,45 +193,91 @@
                     source: ""
 
         BoxLayout:
-            padding: [10,50,10,50]
-            spacing: 50
-            Button:
-                text: 'Show Paper'
-                on_press: root.ShowPaper()
+            size_hint_y: .5
+            padding: [100, 50,100,10]
+            orientation: 'vertical'
+            spacing: 20
+            BoxLayout:
+
+                Button:
+                    background_color: .1 , 1, 1, 1
+                    text: 'Show Result'
+
+                    on_press: root.ShowPaper()
+            BoxLayout:
+                padding: [200, 2,200,2]
+                Button:
+
+                    text: 'Back'
+                    background_color: .1 , 1, 1, 1
+                    on_press: root.manager.current ='connected'
 
 
 <ImportFile>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
-        padding: [10,50,10,50]
+        padding: [10,10,10,10]
         spacing: 50
-        Button:
-            text: "open"
-            on_press: root.open(filechooser.selection , filechooser.path)
-        FileChooserListView:
-            id: filechooser
-            on_selection: root.selected(filechooser.selection)
-        Image:
-            id: image
-            source: ""
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 5
+            orientation: 'horizontal'
+            FileChooserListView:
+                id: filechooser
+                on_selection: root.selected(filechooser.selection)
+            Image:
+                id: image
+                source: ""
+
+        BoxLayout:
+            spacing: 10
+            orientation: 'horizontal'
+            size_hint: 1 , 1
+            Button:
+                text: "Back"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
+                on_press: root.manager.current = 'reference'
+            Button:
+                text: "open"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
+                on_press: root.open(filechooser.selection , filechooser.path)
 
 <SelectOpt>:
     id: selectopthere
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
         padding: [10,50,10,50]
         spacing: 50
         BoxLayout:
+            size_hint_y: 5
+            align: 'center'
             Image:
                 id: image
                 source: " "
         BoxLayout:
             spacing: 10
+            size_hint: 1 , 1
             Button:
                 text: "Select Another"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'importfile'
             Button:
                 text: "Done"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'connected'
 
 <SelectOpt1>:
@@ -190,29 +288,56 @@
         padding: [10,50,10,50]
         spacing: 50
         BoxLayout:
+            size_hint_y: 5
+            align: 'center'
             Image:
                 id: image
                 source: " "
         BoxLayout:
             spacing: 10
+            size_hint: 1 , 1
             Button:
                 text: "Select Another"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'importfile'
             Button:
                 text: "Done"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'connected'
 
-
 <ImportFile2>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: '11.jpg'
     BoxLayout:
-        padding: [10,50,10,50]
+        padding: [10,10,10,10]
         spacing: 50
-        Button:
-            text: "open"
-            on_press: root.ImportAns(filechooser2.selection , filechooser2.path)
-        FileChooserListView:
-            id: filechooser2
-            on_selection: root.selected(filechooser2.selection)
-        Image:
-            id: Aimage
-            source: ""
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 5
+            orientation: 'horizontal'
+            FileChooserListView:
+                id: filechooser2
+                on_selection: root.selected(filechooser2.selection)
+            Image:
+                id: Aimage
+                source: ""
+
+        BoxLayout:
+            spacing: 10
+            orientation: 'horizontal'
+            size_hint: 1 , 1
+            Button:
+                text: "Back"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
+                on_press: root.manager.current = 'answer'
+            Button:
+                text: "open"
+                size_hint: .7 , .7
+                background_color: .1 , 1, 1, 1
+                on_press: root.ImportAns(filechooser2.selection , filechooser2.path)
