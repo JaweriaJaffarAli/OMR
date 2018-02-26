@@ -6,16 +6,14 @@ from imutils import contours
 from imutils.perspective import four_point_transform
 
 
-class AnswerSheet:
-    def AnswerSheet(self, img ,ans):
+class ReferenceSheet:
+    def capturerefsheet(self, img):
+        ans = []
         ratio = img.shape[0] / 500.0
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (5, 5), 0)
         edged = cv2.Canny(gray, 75, 200)
-        # cv2.imshow('image', img)
-        # cv2.imshow("Edged", edged)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+
         # find the contours in the edged image, keeping only the
         # largest ones, and initialize the screen contour
         cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,
@@ -39,11 +37,7 @@ class AnswerSheet:
             if len(approx) == 4:
                 screenCnt = approx
                 break
-        # apply a four point perspective transform to both the
-        # original image and grayscale image to obtain a top-down
-        # birds eye view of the paper
-        # paper = four_point_transform(img, screenCnt.reshape(4, 2) * ratio)
-        # warped = four_point_transform(gray, screenCnt.reshape(4, 2) * ratio)
+
         paper = four_point_transform(img, screenCnt.reshape(4, 2))
         warped = four_point_transform(gray, screenCnt.reshape(4, 2))
         # apply Otsu's thresholding method to binarize the warped
@@ -105,23 +99,7 @@ class AnswerSheet:
                 if bubbled is None or total > bubbled[0]:
                     bubbled = (total, j)
 
-            # initialize the contour color and the index of the
-            # *correct* answer
 
             color = (0, 0, 255)
-            k = ans[q]
             ans.append(bubbled[1])
-
-            # check to see if the bubbled answer is correct
-            if k == bubbled[1]:
-                color = (0, 255, 0)
-                correct += 1
-
-            # draw the outline of the correct answer on the test
-
-
-            cv2.drawContours(paper, [cnts[k]], -1, color, 3)
-
-        # grab the test taker
-        score = (correct / 5.0) * 100
-        return paper , score
+        return ans

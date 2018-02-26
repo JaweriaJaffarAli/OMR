@@ -14,7 +14,7 @@ from connected import SelectOpt
 from connected import SelectOpt1
 from connected import CustomPopup
 import re
-import app
+from Result import login_check
 class Login(Screen):
     def do_login(self, loginText, passwordText):
         app = App.get_running_app()
@@ -25,9 +25,13 @@ class Login(Screen):
         else:
             app.username = loginText
             app.password = passwordText
-
-            self.manager.transition = SlideTransition(direction="left")
-            self.manager.current = 'connected'
+            found = login_check(loginText , passwordText)
+            if found == 1:
+                self.manager.transition = SlideTransition(direction="left")
+                self.manager.current = 'connected'
+            else:
+                obj1 = CustomPopup()
+                obj1.call_pops('Try Again', 'Wrong ID or password')
 
     def resetForm(self):
         self.ids['login'].text = ""

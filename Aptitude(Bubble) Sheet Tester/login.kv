@@ -20,7 +20,7 @@
 
             Label:
                 markup: True
-                text: '[size=20][b]Username[/b][/size]'
+                text: '[size=20][b]UserID[/b][/size]'
                 text_size: root.width-400, 20
 
             TextInput:
@@ -60,34 +60,45 @@
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [50,20,50,20]
-        spacing: 50
+        padding: [80,50,80,50]
+        spacing: 40
 
         Label:
-            text: 'Welcome'
-            font_size: 32
+            markup: True
+            text: '[anchor=title][size=30][b]Aptitude Checker [/b][/size]'
+
 
         Button:
-            text: 'Add Reference Sheet'
+
+            markup: True
+            text: '[size=16][b]Add Reference Sheet[/b][/size]'
+            background_color: .1 , 1, 1, 1
             on_press: root.manager.current ='reference'
 
         Button:
-
-            text: 'Add Answer Sheet'
+            markup: True
+            text: '[size=16][b]Add Answer Sheet[/b][/size]'
+            background_color: .1 , 1, 1, 1
             on_press: root.CheckRefSheet()
 
         Button:
-            text: 'view result'
+            markup: True
+            text: '[size=16][b]View Result[/b][/size]'
+            background_color: .1 , 1, 1, 1
             on_press: root.manager.current = 'result'
 
         Button:
-            text: 'Logout'
+            markup: True
+            text: '[size=16][b]Logout[/b][/size]'
+            background_color: .1 , 1, 1, 1
             on_press: root.disconnect()
 
         BoxLayout:
-            padding: [300 , 0, 300, 0]
+            padding: [250 , 0, 250, 0]
             Button:
-                text: 'Quit'
+                markup: True
+                text: '[size=16][b]Exit[/b][/size]'
+                background_color: 1.0 , 0.0, 0.0, 1.0
                 on_press: root.dismiss()
 
 <Reference>:
@@ -99,24 +110,34 @@
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [10,80,10,50]
-        spacing: 70
-
+        padding: [80,80,80,70]
+        spacing: 50
+        Label:
+            markup: True
+            text: '[anchor=title][size=30][b]Reference Sheet Section[/b][/size]'
         Button:
-            text: 'Import from device'
+            markup: True
+            text: '[size=16][b]Import from device[/b][/size]'
             size_hint: 1 , 1
+            background_color: .1 , 1, 1, 1
             on_press: root.manager.current = 'importfile'
         Button:
-            text: 'Take a Picture'
+            markup: True
+            text: '[size=16][b]Take a Picture[/b][/size]'
             size_hint: 1 , 1
+            background_color: .1 , 1, 1, 1
 
         Button:
-            text: 'Back'
+            markup: True
+            text: '[size=16][b]Back[/b][/size]'
+            background_color: .1 , 1, 1, 1
             on_press: root.manager.current = 'connected'
         BoxLayout:
-            padding: [300 , 0, 300, 0]
+            padding: [250 , 0, 250, 0]
             Button:
-                text: 'Quit'
+                markup: True
+                text: '[size=16][b]Exit[/b][/size]'
+                background_color: 1.0 , 0.0, 0.0, 1.0
                 on_press: root.dismiss()
 <Answer>:
     canvas.before:
@@ -130,35 +151,46 @@
         spacing: 50
         BoxLayout:
             orientation: 'horizontal'
-
+            padding: [50, 0 , 50, 0]
             Label:
-                text: 'Enter Roll Number'
-                color: 2, 2, .92, 1
-                font_size: 18
+                markup: True
+                text: '[size=18][b]Enter Roll Number[/b][/size]'
                 align: 'left'
             TextInput:
+                size_hint_x: 2
                 id: rollNo
                 multiline:False
                 font_size: 18
             Button:
-                text: 'Enter'
+                markup: True
+                text: '[size=16][b]Enter[/b][/size]'
+                background_color: 1.0 , 0.0, 0.0, 1.0
                 on_press: root.EnterRollNo(rollNo.text)
-        Button:
-            text: 'Import from device'
-
-            on_press: root.Check_RollNumber()
-        Button:
-            text: 'Take a Picture'
-
-
-        Button:
-            text: 'Back'
-            on_press: root.manager.current = 'connected'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 5
+            padding: [50,20,50,20]
+            spacing: 40
+            Button:
+                markup: True
+                text: '[size=16][b]Import from device[/b][/size]'
+                background_color: .1 , 1, 1, 1
+                on_press: root.Check_RollNumber()
+            Button:
+                markup: True
+                text: '[size=16][b]Take a Picture[/b][/size]'
+                background_color: .1 , 1, 1, 1
+            Button:
+                markup: True
+                text: '[size=16][b]Back[/b][/size]'
+                background_color: .1 , 1, 1, 1
+                on_press: root.manager.current = 'connected'
         BoxLayout:
             padding: [300 , 0, 300, 0]
             Button:
-                text: 'Quit'
-
+                markup: True
+                text: '[size=16][b]Exit[/b][/size]'
+                background_color: 1.0 , 0.0, 0.0, 1.0
                 on_press: root.dismiss()
 
 <Result>:
@@ -172,21 +204,26 @@
         padding: [10,10,10,10]
         spacing: 10
         BoxLayout:
+            padding: [10,10,10,10]
             orientation: 'horizontal'
             BoxLayout:
                 orientation: 'vertical'
                 Label:
-                    text: 'Roll Number'
+                    markup: True
+                    text: '[size=18][b]Roll Number[/b][/size]'
                 Label:
                     id: rollno
                     text: " "
+                    font_size: 18
             BoxLayout:
                 orientation: 'vertical'
                 Label:
-                    text: 'Marks'
+                    markup: True
+                    text: '[size=18][b]Marks[/b][/size]'
                 Label:
                     id: Score
                     text: " "
+                    font_size: 18
             BoxLayout:
                 Image:
                     id: Pimage
@@ -201,14 +238,14 @@
 
                 Button:
                     background_color: .1 , 1, 1, 1
-                    text: 'Show Result'
-
+                    markup: True
+                    text: '[size=16][b]Show Result[/b][/size]'
                     on_press: root.ShowPaper()
             BoxLayout:
                 padding: [200, 2,200,2]
                 Button:
-
-                    text: 'Back'
+                    markup: True
+                    text: '[size=16][b]Back[/b][/size]'
                     background_color: .1 , 1, 1, 1
                     on_press: root.manager.current ='connected'
 
@@ -220,7 +257,7 @@
             size: self.size
             source: '11.jpg'
     BoxLayout:
-        padding: [10,10,10,10]
+        padding: [20,30,20,30]
         spacing: 50
         orientation: 'vertical'
         BoxLayout:
@@ -238,12 +275,14 @@
             orientation: 'horizontal'
             size_hint: 1 , 1
             Button:
-                text: "Back"
+                markup: True
+                text: '[size=16][b]Back[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'reference'
             Button:
-                text: "open"
+                markup: True
+                text: '[size=16][b]Open[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.open(filechooser.selection , filechooser.path)
@@ -270,15 +309,17 @@
             spacing: 10
             size_hint: 1 , 1
             Button:
-                text: "Select Another"
+                markup: True
+                text: '[size=16][b]Select Another[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'importfile'
             Button:
-                text: "Done"
+                markup: True
+                text: '[size=16][b]Done[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
-                on_press: root.manager.current = 'connected'
+                on_press: root.reset()
 
 <SelectOpt1>:
     id: selectopthere1
@@ -297,12 +338,14 @@
             spacing: 10
             size_hint: 1 , 1
             Button:
-                text: "Select Another"
+                markup: True
+                text: '[size=16][b]Select Another[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'importfile'
             Button:
-                text: "Done"
+                markup: True
+                text: '[size=16][b]Done[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'connected'
@@ -314,7 +357,7 @@
             size: self.size
             source: '11.jpg'
     BoxLayout:
-        padding: [10,10,10,10]
+        padding: [20,30,20,30]
         spacing: 50
         orientation: 'vertical'
         BoxLayout:
@@ -332,12 +375,14 @@
             orientation: 'horizontal'
             size_hint: 1 , 1
             Button:
-                text: "Back"
+                markup: True
+                text: '[size=16][b]Back[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.manager.current = 'answer'
             Button:
-                text: "open"
+                markup: True
+                text: '[size=16][b]Open[/b][/size]'
                 size_hint: .7 , .7
                 background_color: .1 , 1, 1, 1
                 on_press: root.ImportAns(filechooser2.selection , filechooser2.path)
